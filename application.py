@@ -107,7 +107,7 @@ def logout():
 
 
 # quiz system
-subscription_key = 'a7424ac997bf469e88744b25f4e06454'
+subscription_key = '放你的金耀'
 region = "eastasia"
 language = "en-US"
 voice = "Microsoft Server Speech Text to Speech Voice (en-US, JennyNeural)"
