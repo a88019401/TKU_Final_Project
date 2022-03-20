@@ -1,0 +1,211 @@
+{% extends "bootstrap/base.html" %}
+
+{% block title %}
+Pronunciation Assessment
+{% endblock %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet" href="{{url_for('.static', filename='css/starter-template.css')}}">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="content-type" content="application/vnd.ms-excel; charset=UTF-8" />
+<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+{% endblock %}
+
+
+{% block content %}
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">國中英語口說評測</a>
+          </div>
+          <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+            <li class="active"><a href="{{ url_for('index') }}">首頁</a></li>
+            <li><a href="#">當前使用者: {{ name }}</a></li>
+            <li><a href="{{ url_for('logout') }}">登出</a></li>
+            </ul>
+        <!--/.nav-collapse -->
+    </div>
+</nav>
+
+
+<h1>請開始錄製。</h1>
+
+<div id=userInfo>
+    <table>
+        <tr>
+            <th>
+                <p class="questions">班級:</p>
+            <th><input id="textbox1" type="text" name="question1"></th>
+            <th>
+                <p class="questions">姓名:</p>
+            </th>
+            <th><input id="textbox2" type="text" name="question2"></th>
+            <th>
+                <p class="questions">座號:</p>
+            </th>
+            <th><input id="textbox3" type="text" name="question3"></th>
+        </tr>
+        </tr>
+    </table>
+    <div>
+        <input type="radio" name="question4" checked=true>還沒錄好 :(<br>
+        <input id="sureRadio" type="radio" id="mc" name="question4">確認繳交 :D<br>
+    </div>
+</div>
+<p class="questions">請將您抽到的紙條打入框框內! </p>
+
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+<div class="container" id="ttscont">
+    <div class="button-container">
+        <button id="buttonhear" class="h-button">
+            <span class="fas fa-headphones"></span>按下我!我可以幫你念!</button>
+    </div> 
+
+    <div id="ttsList"></div>
+    <div class="container" id="ttsloader">
+        <div id="loader"></div>
+    </div> 
+</div>
+
+<div class=container id="formcontainer">
+    <form id="reftextform">
+        <textarea id = "reftext" rows = "3" cols = "80" name = "reftext" maxlength="160" autofocus placeholder="請將英文句子複製此框框內..."></textarea>
+    </form>
+    <br>
+</div>
+
+<div class="button-container">
+    <button id="randomtt" class="blue-button">
+        <span class="fa fa-random"></span>英文順口溜</button>
+    <button id="buttonmic" class="green-button">
+        <span class="fa fa-microphone"></span>錄音</button>
+</div>
+
+<div class="container" id="recordcont">
+    <div id="recordingsList"></div>
+
+    <div class="container" id="recordloader">
+        <div id="loader"></div>
+    </div>
+    
+    <div id="metrics" class="animate-bottom">
+        <div class=container>
+            <div id="summarytable">
+                <table>
+                    <tr>
+                        <th>Accuracy Score</th>
+                        <th>Fluency Score</th>
+                        <th>Completeness Score</th>
+                        <th>Pronunciation Score</th>
+                        <th id="woh">Words Omitted</th>
+                        <th id="wih">Extra Words Spoken</th>
+                    </tr>
+                    <tr>
+                        <td id="accuracyscore"></td>
+                        <td id="fluencyscore"></td>
+                        <td id="completenessscore"></td>
+                        <td id="pronscore"></td>
+                        <td id="wordsomitted"></td>
+                        <td id="wordsinserted"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        
+        <div class="container">
+            <div id="detailedtable">
+                <table>
+                    <tr id="wordrow"></tr>
+                    <tr id ="phonemerow"></tr>
+                    <tr id ="scorerow"></tr>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+    <div id="recordingsList"></div>
+    <div class="container" id="recordloader">
+        <div id="loader"></div>
+    </div>
+    <div id="metrics" class="animate-bottom">
+        <div class=container>
+            <div id="summarytable">
+                <table>
+                    <tr>
+                        <th>Accuracy Score</th>
+                        <th>Fluency Score</th>
+                        <th>Completeness Score</th>
+                        <th>Pronunciation Score</th>
+                        <th id="woh">Words Omitted</th>
+                        <th id="wih">Extra Words Spoken</th>
+                    </tr>
+                    <tr>
+                        <td id="accuracyscore"></td>
+                        <td id="fluencyscore"></td>
+                        <td id="completenessscore"></td>
+                        <td id="pronscore"></td>
+                        <td id="wordsomitted"></td>
+                        <td id="wordsinserted"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="container">
+            <div id="detailedtable">
+                <table>
+                    <tr id="wordrow"></tr>
+                    <tr id="phonemerow"></tr>
+                    <tr id="scorerow"></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<input id="button" type="button" value="I'm finished!" onclick="myexcel();">
+<footer id=footeralert>請允許你的麥克風使用!</footer>
+<script src="{{ url_for('static', filename='js/index.js') }}"></script>
+<script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
+<script>//print Excel 
+    function myexcel() {
+        var question1 = document.getElementById('textbox1').value;
+        var question2 = document.getElementById('textbox2').value;
+        var question3 = document.getElementById('textbox3').value;
+        var question4 = document.getElementById('sureRadio').checked;
+        if (question1 == 0) {
+            alert("你好像忘記打上自己的班級唷!")
+            return false;
+        }
+        if (question2 == 0) {
+            alert("你好像忘記打上自己的名字唷!")
+            return false;
+        }
+        if (question3 == 0) {
+            alert("你好像忘記打上自己的座號唷!")
+            return false;
+        }
+        if (question4 == 0) {
+            alert("請勾選確認錄音後繳交!")
+            return false;
+        }
+        document.getElementById('userInfo').innerHTML = " 班級 : " + question1 + " 姓名 : " + question2 + " 座號: " + question3;
+        var html = '<meta http-equiv="content-type" content="application/vnd.ms-excel; charset=UTF-8" /><title>Excel</title>';
+        var html01 = '<meta http-equiv="content-type" content="application/vnd.ms-excel; charset=UTF-8" /><title>Excel</title>';
+        html += document.getElementById('recordcont').innerHTML + '';
+        html01 += document.getElementById('userInfo').innerHTML + '';
+        window.open('data:application/vnd.ms-excel,' + encodeURIComponent(html01) + encodeURIComponent(html));
+    }
+</script>
+{% endblock %}
