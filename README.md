@@ -1,5 +1,8 @@
-# 國中一年級下學期第一次段考口說評測系統指令操作
 
+
+![image](https://github.com/a88019401/TKU_Final_Project/blob/main/1.JPG)
+##  國中口說評測系統
+(這是我學士後畢業的心血QQ，一人獨立完成，那時還沒有ChatGPT，回頭想想我當時真厲害xD)
 ## 啟動環境與執行伺服器
 
 ```bash
